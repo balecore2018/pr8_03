@@ -24,46 +24,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void AlertDialogs(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title)
-                .setMessage(message)
-                .setCancelable(false)
+    public void AlertDialogs(String title, String message){ // спавним метод алерт диалог + параметры
+        AlertDialog.Builder builder = new AlertDialog.Builder(this); // билдер на русском строитель создаем хай строит
+        builder.setTitle(title) // устанавливаем заголовок
+                .setMessage(message) // и сообщение
+                .setCancelable(false) // отмена по нажатию
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         dialog.cancel();
                     }
-                });
-        AlertDialog alter = builder.create();
-        alter.show();
+                });  // создаем кнопку
+        AlertDialog alter = builder.create(); // создаем диалог алтер типа ссылки на диалог
+        alter.show(); // и показываем его
     }
 
-    public void Consider(View view) {
-        EditText course = findViewById(R.id.cours);
-        EditText count = findViewById(R.id.count);
-        Switch dollar = findViewById(R.id.switch1);
-        TextView tv = findViewById(R.id.result);
+    public void Consider(View view) { // метод консидер
+        EditText course = findViewById(R.id.cours); // ищем тексбокс
+        EditText count = findViewById(R.id.count); // еще текстбокс
+        Switch dollar = findViewById(R.id.switch1); // свитч ищем
+        TextView tv = findViewById(R.id.result); // ищем лабел результа
 
-        if(course.getText().length() > 0) {
-            if(count.getText().length() > 0) {
-                float f_course = Float.parseFloat(String.valueOf(course.getText()));
-                float f_count = Float.parseFloat(String.valueOf(count.getText()));
+        if(course.getText().length() > 0) { // проверка что курс не 0
+            if(count.getText().length() > 0) { // проверка что каунт не 0
+                float f_course = Float.parseFloat(String.valueOf(course.getText())); // флоат делаем и конвертим туда значение
+                float f_count = Float.parseFloat(String.valueOf(count.getText())); // флоат делаем и конвертим туда значение
 
-                float composition = 0;
-                if(dollar.isChecked() == true) {
-                    composition = f_course*f_count;
-                    tv.setText(composition + " р.");
-                } else {
-                    composition = f_count/f_course;
-                    tv.setText(composition + " $.");
+                float composition = 0; // выстраиваем композицию
+                if(dollar.isChecked() == true) { // если свич он тогда....
+                    composition = f_course*f_count; // в композицию записывается курс умнож на каунт
+                    tv.setText(composition + " р."); // в рез выводим композицию + р.
+                } else { // если что-то не так то...
+                    composition = f_count/f_course; // каунт делим на курс
+                    tv.setText(composition + " $."); // также выводим композ
                 }
-            } else AlertDialogs("Уведомление", "Введите кол-во доллара.");
-        } else AlertDialogs("Уведомление", "Введите курс доллара.");
+            } else AlertDialogs("Уведомление", "Введите кол-во доллара."); // проверки на заполненность вывод ошибки
+        } else AlertDialogs("Уведомление", "Введите курс доллара."); // проверки на заполненность вывод ошибки
     }
 
-    public void URL(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.sberbank.ru/ru/quotes/currencies"));
-        startActivity(intent);
+    public void URL(View view) { // новый метод юрл
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.sberbank.ru/ru/quotes/currencies")); // переменная с переходом по ссылке
+        startActivity(intent); // сстартуем!!!!
     }
 }
